@@ -2,7 +2,8 @@ import React from 'react';
 import "./Result.css";
 
 class Result extends React.Component {
-
+	/* 합이 0 이 되는 subset 들로 최대한 나누고,
+		 그 subset 들의 index array 를 반환한다. */
 	getMaximumSubsets(paidMoney) {
 		const money = [...paidMoney];
 		const subsets = [[]];			/* 모든 subset 의 index array */
@@ -47,7 +48,7 @@ class Result extends React.Component {
 		/* 남은 원소들이 있는 경우 (합은 0 이지만 길이가 전체 길이의 절반 초과인 경우) */
 		const rest = [];
 		for (let i=0; i<money.length; i++)
-			if (money[i] != undefined)
+			if (money[i] !== undefined)
 				rest.push(i);
 		if (rest !== [])
 			result.push(rest);
@@ -89,8 +90,49 @@ class Result extends React.Component {
 					totalPaidMoney[j] += money / joinNum;
 		}
 
-		const subsets = getMaximumSubsets(totalPaidMoney);
-		console.log(subsets);
+		const subsets = getMaximumSubsets(totalPaidMoney);	/* index array of subset */
+		const fromTo = [];																	/* payer, payee 쌍의 집합 */
+
+		/* 각 SUBSET 내에서 돈의 이동(from->to)를 구한다.
+			 SUBSET 내의 money 총합은 0 이므로 SUBSET 내에서만 주고 받아 정산을 
+			 끝낼 수 있다. n 명의 사람이 있다면 n-1 번의 송금으로 가능하다. 돈을 보내지
+			 않는 한 사람(ROOT)은 총 지출액이 가장 큰 사람으로 정한다. */
+		for (let i=0; i<subsets.length; i++) {
+			const subset = subsets[i];
+			const money = [];
+
+			/* SUBSET 의 원소(전체 array 에서의 index)에 대응하는 money */
+			for (let j=0; j<subset.length; j++)
+				money.push(totalPaidMoney[subset[j]]);
+
+			/* 총 지출액이 가장 큰 사람의 index */
+			const root = money.indexOf(Math.min(...money));
+
+			/* SUBSET 내에서 정산이 완료될 때까지 {FROM, TO} 를 구한다 */
+			while (fromTo.length !== subset.length-1) {
+				let from, to;
+
+				for (let j=0; j<money.length; j++) {
+					/* 돈을 줘야 하는 사람 */
+					if (from === undefined && money[j] > 0) {
+						from = j;
+						/* ROOT 가 받을 금액보다 작은 경우, ROOT 에게 우선적으로 보낸다 */
+						if (money[from] <= Math.abs(money[root]))
+							to = root;
+					}
+					/* 돈을 보내야 하는 사람 */
+					else if (to === undefined && money[j] < 0 && j !== root)
+						to = j;
+
+					if (from !== undefined && to !== undefined)
+						break;
+				}
+				money[to] += money[from];
+				money[from] = 0;
+				fromTo.push({from: subset[from], to: subset[to]});
+			}
+		}
+		console.log("fromTo:", fromTo);
 
 		return (
 			<div>
