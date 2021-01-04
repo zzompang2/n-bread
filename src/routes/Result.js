@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import "./Result.css";
 
 class Result extends React.Component {
@@ -50,16 +52,16 @@ class Result extends React.Component {
 		for (let i=0; i<money.length; i++)
 			if (money[i] !== undefined)
 				rest.push(i);
-		if (rest !== [])
+		if (rest.length !== 0)
 			result.push(rest);
 
 		return result;
 	}
-	
+
 	render() {
 		const { location: { state } } = this.props;
 		const { number, people, payments } = state;
-		const { getMaximumSubsets } = this;
+		const { getMaximumSubsets, goBack } = this;
 
 		const totalPaidMoney = [];		/* 각자 지불해야 할 총 금액 */
 
@@ -91,12 +93,13 @@ class Result extends React.Component {
 		}
 
 		const subsets = getMaximumSubsets(totalPaidMoney);	/* index array of subset */
-		const fromTo = [];																	/* payer, payee 쌍의 집합 */
+		const moneyFlows = [];															/* payer, payee 쌍의 집합 */
 
 		/* 각 SUBSET 내에서 돈의 이동(from->to)를 구한다.
 			 SUBSET 내의 money 총합은 0 이므로 SUBSET 내에서만 주고 받아 정산을 
 			 끝낼 수 있다. n 명의 사람이 있다면 n-1 번의 송금으로 가능하다. 돈을 보내지
 			 않는 한 사람(ROOT)은 총 지출액이 가장 큰 사람으로 정한다. */
+		console.log(subsets);
 		for (let i=0; i<subsets.length; i++) {
 			const subset = subsets[i];
 			const money = [];
@@ -109,7 +112,7 @@ class Result extends React.Component {
 			const root = money.indexOf(Math.min(...money));
 
 			/* SUBSET 내에서 정산이 완료될 때까지 {FROM, TO} 를 구한다 */
-			while (fromTo.length !== subset.length-1) {
+			while (money[root] !== 0) {
 				let from, to;
 
 				for (let j=0; j<money.length; j++) {
@@ -127,12 +130,12 @@ class Result extends React.Component {
 					if (from !== undefined && to !== undefined)
 						break;
 				}
+				moneyFlows.push({from: subset[from], to: subset[to], money: money[from]});
 				money[to] += money[from];
 				money[from] = 0;
-				fromTo.push({from: subset[from], to: subset[to]});
 			}
 		}
-		console.log("fromTo:", fromTo);
+		console.log("moneyFlows:", moneyFlows);
 
 		return (
 			<div>
@@ -148,6 +151,30 @@ class Result extends React.Component {
 						<div className="payment__name">{totalPaidMoney[person.id]}</div>
 					</div>
 				))}
+				<span className="tag payment__name">송금</span>
+				{moneyFlows.map((flow, idx) => (
+					<div key={idx} className="payment">
+						<div className="payment__id">{flow.from}</div>
+						<div className="payment__name">{people[flow.from].name}</div>
+						<div>=== {flow.money}원 =={'>'}</div>
+						<div className="payment__id">{flow.to}</div>
+						<div className="payment__name">{people[flow.to].name}</div>
+					</div>
+				))}
+				<div>
+					<Link
+						className="backBtn"
+						to={{
+							pathname: "/calculation",
+							state: {
+								from: "/calculation/result",
+								number,
+								people,
+								payments
+							}
+						}}
+					>수정하기</Link>
+				</div>
 			</div>
 		);
 	}

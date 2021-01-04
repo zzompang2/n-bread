@@ -5,18 +5,18 @@ import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
 	state = {
-		input: 0
+		number: 0
 	}
-	// const  poeple = document.querySelector("input").value;
+	// const  poeple = document.querySelector("number").value;
 
 	handleChange = (e) => {
     this.setState({
-      input: e.target.value
+      number: e.target.value
     });
   }
 
 	render() {
-		const { input } = this.state;
+		const { number } = this.state;
     const {
 			handleChange
 		} = this;
@@ -33,12 +33,15 @@ class Home extends React.Component {
 						title="인원수"
 						onChange={handleChange} />
 				</div>
-				{input > 0 ?
+				{number >= 2 && Number.isInteger(Number(number)) ?
 					<Link
 						className="calBtn"
 						to={{
 							pathname: "/calculation",
-							state: { input }
+							state: {
+								from: "/",
+								number
+							}
 						}}>
 						N빵
 					</Link>

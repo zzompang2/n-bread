@@ -103,34 +103,31 @@ class Calculation extends React.Component {
 		return atLeastOne;
 	}
 
-	// handleComplete = () => {
-	// 	this.verifyValue();
-	// 	if (this.state.isValid)
-	// 		console.log("no problem!");
-	// 	else
-	// 		console.log("문제 있다");
-	// }
-
 	componentDidMount() {
 		const { location: { state }, history } = this.props;
-		const number = state !== undefined ? state.input : 0;
-		const people = [];
-		const joins = [];
-		const payments = [];
-
+		console.log(history);
 		if (state === undefined) {
 			history.push("/");
 		}
+		else if (state.from === "/"){
+			const { number } = state;
+			const people = [];
+			const payments = [];
+			const joins = [];
 
-		for (let i = 0; i < number; i++)
-			joins.push(true);
+			for (let i = 0; i < number; i++)
+				joins.push(true);
 
-		for (let i = 0; i < number; i++) {
-			people.push({ id: i, name: "unknown"});
+			for (let i = 0; i < number; i++) {
+				people.push({ id: i, name: "unknown"});
+			}
+			payments.push({ pid: 0, payer: 0, money: "", joins: [...joins] });
+			this.setState({number, people, payments});
 		}
-		payments.push({ pid: 0, payer: 0, money: "", joins: [...joins] });
-		this.setState({number, people, payments});
-		console.log(payments);
+		else if (state.from === "/calculation/result") {
+			const { number, people, payments } = state;
+			this.setState({number, people, payments});
+		}
 	}
 
 	render() {
@@ -144,8 +141,7 @@ class Calculation extends React.Component {
 			handleBlur,
 			handleCheck,
 			handleAdd,
-			handleDelete,
-			handleComplete } = this;
+			handleDelete } = this;
 		return (
 			<div>
 				<div>총 인원 수: {number}</div>
@@ -219,7 +215,7 @@ class Calculation extends React.Component {
 					<Link
 						className="completeBtn"
 						to={{
-							pathname: "/result",
+							pathname: "/calculation/result",
 							state: {
 								number,
 								people,

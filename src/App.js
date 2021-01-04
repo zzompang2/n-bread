@@ -13,8 +13,8 @@ function App() {
       <Navigation />
       <Route exact path="/" component={Home} />
       <Route path="/about" component={About} />
-      <Route path="/calculation" component={Calculation} />
-      <Route path="/result" component={Result} />
+      <Route exact path="/calculation" component={Calculation} />
+      <Route path="/calculation/result" component={Result} />
     </HashRouter>
   )
 }
