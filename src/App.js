@@ -4,6 +4,7 @@ import Navigation from "./routes/Navigation";
 import Home from "./routes/Home";
 import About from "./routes/About";
 import Calculation from "./routes/Calculation";
+import Result from "./routes/Result";
 import "./App.css";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <Route exact path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/calculation" component={Calculation} />
+      <Route path="/result" component={Result} />
     </HashRouter>
   )
 }

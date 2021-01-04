@@ -1,11 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import "./Calculation.css";
 
 class Calculation extends React.Component {
 	state = {
 		number: 0,
 		people: [],
-		payments: []
+		payments: [],
+		isValid: true
 	}
 	handleChangeName = (e) => {
 		const people = [...this.state.people];
@@ -57,7 +59,7 @@ class Calculation extends React.Component {
 		for (let i=0; i<payments.length; i++) {
 			if (payments[i].pid === Number(value)) {
 				payments[i].joins[id] = checked;
-				this.setState({payments});
+				this.setState({payments, isValid: this.verifyValue(i)});
 				break;
 			}
 		}
@@ -88,9 +90,26 @@ class Calculation extends React.Component {
 		}
 	}
 
-	handleComplete = () => {
-		console.log("handleComplete");
+	verifyValue(pid) {
+		const { payments } = this.state;
+
+		let atLeastOne = false;
+		for (let i=0; i<payments[pid].joins.length; i++) {
+			if (payments[pid].joins[i]) {
+				atLeastOne = true;
+				break;
+			}
+		}
+		return atLeastOne;
 	}
+
+	// handleComplete = () => {
+	// 	this.verifyValue();
+	// 	if (this.state.isValid)
+	// 		console.log("no problem!");
+	// 	else
+	// 		console.log("문제 있다");
+	// }
 
 	componentDidMount() {
 		const { location: { state }, history } = this.props;
@@ -109,14 +128,14 @@ class Calculation extends React.Component {
 		for (let i = 0; i < number; i++) {
 			people.push({ id: i, name: "unknown"});
 		}
-		payments.push({ pid: 0, payer: 0, money: undefined, joins: [...joins] });
+		payments.push({ pid: 0, payer: 0, money: "", joins: [...joins] });
 		this.setState({number, people, payments});
 		console.log(payments);
 	}
 
 	render() {
 		console.log("render");
-		const { number, people, payments } = this.state;
+		const { number, people, payments, isValid } = this.state;
 		const { 
 			handleChangeName,
 			handleChangeMoney,
@@ -196,8 +215,21 @@ class Calculation extends React.Component {
 				))}
 				<button
 					onClick={handleAdd}>추가</button>
-				<button
-					onClick={handleComplete}>완료</button>
+				{isValid ?
+					<Link
+						className="completeBtn"
+						to={{
+							pathname: "/result",
+							state: {
+								number,
+								people,
+								payments
+							}
+						}}>
+						완료
+					</Link>
+					:
+					<div>항목당 최소 한 명은 참가해야 합니다.</div>}
 			</div>
 		);
 	}
