@@ -1,0 +1,31 @@
+.payment {
+	padding: 5px 10px;
+	display: flex;
+	flex-direction: row;
+}
+
+.payment__id {
+	width: 30px;
+	color: #59271C;
+	text-align: end;
+	padding-right: 5px;
+}
+
+.payment__name {
+	display: inline-block;
+	width: 70px;
+	padding-right: 5px;
+	white-space: nowrap;	/* 여러 줄 방지 */
+}
+
+.payment__pay {
+	width: 100px;
+}
+
+.tag {
+	text-align: center;
+}
+
+.checkbox {
+	width: 20px;
+}

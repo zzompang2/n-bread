@@ -6,7 +6,7 @@ function Navigation() {
 	return (
 		<div className="nav">
 			<Link to="/">홈</Link>
-			<Link to="/calculation">계산하기</Link>
+			<Link to="/about">만든이</Link>
 		</div>
 	)
 }

@@ -28,6 +28,7 @@
 	color: #59271C;
 	border: none;
 	border-radius: 20px;
+	outline: none;
 }
 
 .people input::-webkit-inner-spin-button {
@@ -44,9 +45,12 @@
 .calBtn {
 	width: 100px;
 	padding: 10px;
-	color: white;
 	background-color: #ffffff00;
 	border: solid #BF9075;
 	border-radius: 2px;
 	margin: 20px;
+	outline: none;
+	text-align: center;
+	color: white;
+	text-decoration: none;
 }
