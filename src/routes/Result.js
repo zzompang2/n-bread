@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import "./Result.css";
+import logo from "../images/logo_after.png";
 
 class Result extends React.Component {
 	/* 합이 0 이 되는 subset 들로 최대한 나누고,
@@ -135,45 +135,81 @@ class Result extends React.Component {
 				money[from] = 0;
 			}
 		}
-		console.log("moneyFlows:", moneyFlows);
+		
+		let isAllZero = true;
+		for (let i=0; i<moneyFlows.length; i++) {
+			if (moneyFlows[i].money !== 0) {
+				isAllZero = false;
+				break;
+			}
+		}
 
 		return (
-			<div>
-				<div className="payment">
-					<span className="payment__id">id</span>
-					<span className="tag payment__name">name</span>
-					<span className="tag payment__name">결제액</span>
+			<div className="container">
+				<Link
+					to={{ pathname: "/" }}>
+					<img className="logoImage_small" src={logo} alt="빵" />
+				</Link>
+				
+				<div className="title">엔빵 완료!</div>
+				<div className="payments">
+					<div className="table__row">
+						<span className="body__text table__id">번호</span>
+						<span className="body__text table__name">이름</span>
+						<span className="body__text table__pay">총 지불액</span>
+					</div>
+					{people.map(person => (
+						<div key={person.id} className="table__row">
+							<div className="table__id whiteBox">{person.id}</div>
+							<div className="table__name whiteBox">{person.name}</div>
+							<div className="table__pay whiteBox">{totalPaidMoney[person.id]}</div>
+						</div>
+					))}
 				</div>
-				{people.map(person => (
-					<div key={person.id} className="payment">
-						<div className="payment__id">{person.id}</div>
-						<div className="payment__name">{person.name}</div>
-						<div className="payment__name">{totalPaidMoney[person.id]}</div>
-					</div>
-				))}
-				<span className="tag payment__name">송금</span>
-				{moneyFlows.map((flow, idx) => (
-					<div key={idx} className="payment">
-						<div className="payment__id">{flow.from}</div>
-						<div className="payment__name">{people[flow.from].name}</div>
-						<div>=== {flow.money}원 =={'>'}</div>
-						<div className="payment__id">{flow.to}</div>
-						<div className="payment__name">{people[flow.to].name}</div>
-					</div>
-				))}
+
+				<div className="empty" />
+
+				{isAllZero ?
+				<div className="body__text">정산할 게 없네요! 이렇게 깔끔할 수가!</div>
+				:
 				<div>
+					<div className="body__text">돈 보내주세요</div>
+					<div className="moneyFlow">
+						<div className="table__row">
+							<span className="body__text table__id">번호</span>
+							<span className="body__text table__name">보내는 이</span>
+							<span className="body__text table__pay">금액</span>
+							<span className="body__text table__id">번호</span>
+							<span className="body__text table__name">받는 이</span>
+						</div>
+					
+						{moneyFlows.map((flow, idx) => (
+							<div key={idx} className="table__row">
+								<div className="table__id whiteBox">{flow.from}</div>
+								<div className="table__name whiteBox">{people[flow.from].name}</div>
+								<div className="table__pay whiteBox">{flow.money}원</div>
+								<div className="table__id whiteBox">{flow.to}</div>
+								<div className="table__name whiteBox">{people[flow.to].name}</div>
+							</div>
+						))}
+					</div>
+				</div>
+				}
+				<div className="empty" />
+				
+				<div className="navButton">
 					<Link
-						className="backBtn"
+						className="navButton__link"
 						to={{
 							pathname: "/calculation",
 							state: {
-								from: "/calculation/result",
 								number,
 								people,
 								payments
 							}
-						}}
-					>수정하기</Link>
+						}}>
+						◀ 수정하기
+					</Link>
 				</div>
 			</div>
 		);

@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "./Calculation.css";
+import logo from "../images/logo_before.png";
 
 const errorMsgs = [
 	"",
 	"사람이 아무도 없어요..",
 	"혼자서 정산을..?",
 	"양의 정수로 입력해 주세요.",
-	"죄송해요, 20명까지만 지원해요."
+	"죄송해요, 20명까지만 지원해요.",
+	"몇 명인지 먼저 입력하고 [확인]을 눌러주세요."
 ];
 const tempNames = [
 	"함창수",
@@ -204,17 +206,29 @@ class Calculation extends React.Component {
 
 		return (
 			<div className="container">
+				<Link
+					to={{ pathname: "/" }}>
+					<img className="logoImage_small" src={logo} alt="빵" />
+				</Link>
+				
+				<div className="title">정보 입력</div>
 
-				<div className="body__text">몇 명인가요?</div>
-				<div className="numberBox">
-					<input
-						type="number"
-						placeholder="0"
-						value={numberInput}
-						onChange={handleChangeNumber} />
-					<button
-						onClick={handleClickSetNumber}>확인</button>
+				{ number < 2 ?
+				<div>
+					<div className="body__text">몇 명인가요?</div>
+					<div className="numberBox">
+						<input
+							type="number"
+							placeholder="0"
+							value={numberInput}
+							onChange={handleChangeNumber} />
+						<button
+							onClick={handleClickSetNumber}>확인</button>
+					</div>
 				</div>
+				:
+				<div className="body__text">모두 {number}명이군요!</div>
+				}
 				<div className="errorMsg">{errorMsgs[errorIdx]}</div>
 
 				{/* people list */}
@@ -265,7 +279,7 @@ class Calculation extends React.Component {
 								:
 								person.name}</div>
 						))}
-						<div className="body__text table__delButton">삭제</div>
+						<div className="body__text table__delButton" />
 					</div>
 					{/* table elements */}
 					{payments.map(payment => (
@@ -297,6 +311,7 @@ class Calculation extends React.Component {
 									onChange={handleChangeMoney}
 									onFocus={handleFocus}
 									onBlur={handleBlur} />
+								<div>원</div>
 							</div>
 							{payment.joins.map((join, id) => (
 								<div
@@ -328,6 +343,7 @@ class Calculation extends React.Component {
 				: <div /> }
 
 				<div className="navButton">
+					{ number !== 0 ?
 					<Link
 						className="navButton__link"
 						to={{
@@ -338,13 +354,14 @@ class Calculation extends React.Component {
 								payments
 							}
 						}}>
-						정산하기
+						정산하기 ▶
 					</Link>
-					<Link
-						className="navButton__link"
-						to={{ pathname: "/" }}>
-						돌아가기
-					</Link>
+					:
+					<button
+						onClick={() => this.setState({errorIdx: 5})}>
+						정산하기 ▶
+					</button>
+					}
 				</div>
 			</div>
 		);
