@@ -6,12 +6,13 @@ const errorMsgs = [
 	"",
 	"사람이 아무도 없어요..",
 	"혼자서 정산을..?",
-	"양의 정수로 입력해 주세요."
+	"양의 정수로 입력해 주세요.",
+	"죄송해요, 20명까지만 지원해요."
 ];
 const tempNames = [
-	"창수",
-	"진",
-	"서현",
+	"함창수",
+	"최진",
+	"정서현",
 	"공희재",
 	"조소정",
 	"김상엽",
@@ -54,6 +55,8 @@ class Calculation extends React.Component {
 			this.setState({errorIdx: 2});
 		else if (numberInput < 0 || !Number.isInteger(numberInput))
 			this.setState({errorIdx: 3});
+		else if (numberInput > 20)
+			this.setState({errorIdx: 4});
 		else {
 			// const { number } = state;
 			const number = numberInput;
@@ -64,8 +67,12 @@ class Calculation extends React.Component {
 			for (let i = 0; i < number; i++)
 				joins.push(true);
 
+			const names = [...tempNames];
+
 			for (let i = 0; i < number; i++) {
-				people.push({ id: i, name: tempNames[i]});
+				const random = Math.floor(Math.random() * names.length);
+				console.log("random:", random, "namesLen:", names.length);
+				people.push({ id: i, name: names.splice(random, 1)});
 			}
 			payments.push({ pid: 0, payer: 0, money: "", joins: [...joins] });
 			this.setState({number, people, payments, errorIdx: 0});
