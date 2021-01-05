@@ -1,53 +1,27 @@
 import React from 'react';
 import "./Home.css";
-import bg from "../images/bread.jpg";
+import logo from "../images/logo.png";
 import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
-	state = {
-		number: 0
-	}
-	// const  poeple = document.querySelector("number").value;
-
-	handleChange = (e) => {
-    this.setState({
-      number: e.target.value
-    });
-  }
-
 	render() {
-		const { number } = this.state;
-    const {
-			handleChange
-		} = this;
-		
 		return (
 			<div className="container">
-				<img className="bgImage" src={bg} alt="빵" />
-				<p>여러 명이 결제했더라도<br/>한 번의 송금으로 정산을 완료하세요.</p>
-				<div className="people">
-					<span>N =</span>
-					<input
-						placeholder="사람 수"
-						type="number"
-						title="인원수"
-						onChange={handleChange} />
-				</div>
-				{number >= 2 && Number.isInteger(Number(number)) ?
+				<img className="logoImage" src={logo} alt="빵" />
+				<div className="body__text">여러 명이 결제해도<br/>
+					<b>한 번의 송금</b>으로 정산을 완료하세요.</div>
+				<div className="navButton">
 					<Link
-						className="calBtn"
-						to={{
-							pathname: "/calculation",
-							state: {
-								from: "/",
-								number
-							}
-						}}>
-						N빵
+						className="navButton__link"
+						to={{ pathname: "/calculation" }}>
+						N빵하기
 					</Link>
-					:
-					<div className="calBtn">N빵</div>
-				}
+					<Link
+						className="navButton__link"
+						to={{ pathname: "/about" }}>
+						만든이
+					</Link>
+				</div>
 			</div>
 		);
 	}

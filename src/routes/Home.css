@@ -1,56 +1,50 @@
+@import '../assets/fonts.css';
+
+:root {
+	--dark-brown: #4f311a;
+	--light-brown: #e4d7c2;
+}
+
 .container {
-  height: 100%;
+	min-width: 10rem;
+	padding: 10rem 0 0 0;
+
 	display: flex;
-	align-items: center;
-	/* justify-content: center; */
 	flex-direction: column;
+	align-items: center;
 }
 
-.container p {
-	color: white;
+.body__text {
+	padding: .5rem 0;
+	color: var(--dark-brown);
 	text-align: center;
+	font-family: 'Nanum Myeongjo';
+	font-size: 1rem;
+	line-height: 1.5em;
 }
 
-.bgImage {
+.logoImage {
 	max-width: 200px;
-	border-radius: 10px;
-	/* transform: rotate(90deg); */
 	margin: 20px;
 }
 
-.people input {
-	/* height: auto;
-	line-height: normal; */
-	width: 40px;
+.navButton {
+	width: 14em;
+	padding: .8rem 2rem;
+	margin: 20px 0;
+	
+	display: flex;
+	justify-content: space-around;
+
+	background-color: white;
+	border: .4rem solid var(--dark-brown);
+	box-shadow: 8px 8px 0px 0 var(--dark-brown);
+}
+
+.navButton__link {
+	color: var(--dark-brown);
+	font-size: 1.2em;
+	font-family: "돋움", "Do Hyeon";
 	text-align: center;
-	padding: .8em .9em;
-	margin: 8px;
-	color: #59271C;
-	border: none;
-	border-radius: 20px;
-	outline: none;
-}
-
-.people input::-webkit-inner-spin-button {
-	appearance: none; 
-}
-
-.people span {
-	text-decoration: none;
-  color: #ffffff;
-  font-size: 20px;
-  /* text-align: center; */
-}
-
-.calBtn {
-	width: 100px;
-	padding: 10px;
-	background-color: #ffffff00;
-	border: solid #BF9075;
-	border-radius: 2px;
-	margin: 20px;
-	outline: none;
-	text-align: center;
-	color: white;
 	text-decoration: none;
 }
