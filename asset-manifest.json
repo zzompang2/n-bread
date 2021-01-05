@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/n-bread/static/css/main.2fff404f.chunk.css",
-    "main.js": "/n-bread/static/js/main.fdfd59ee.chunk.js",
-    "main.js.map": "/n-bread/static/js/main.fdfd59ee.chunk.js.map",
+    "main.css": "/n-bread/static/css/main.722c5016.chunk.css",
+    "main.js": "/n-bread/static/js/main.ce67f6a1.chunk.js",
+    "main.js.map": "/n-bread/static/js/main.ce67f6a1.chunk.js.map",
     "runtime-main.js": "/n-bread/static/js/runtime-main.76ccf057.js",
     "runtime-main.js.map": "/n-bread/static/js/runtime-main.76ccf057.js.map",
-    "static/js/2.78d1b63f.chunk.js": "/n-bread/static/js/2.78d1b63f.chunk.js",
-    "static/js/2.78d1b63f.chunk.js.map": "/n-bread/static/js/2.78d1b63f.chunk.js.map",
+    "static/js/2.1cb4535e.chunk.js": "/n-bread/static/js/2.1cb4535e.chunk.js",
+    "static/js/2.1cb4535e.chunk.js.map": "/n-bread/static/js/2.1cb4535e.chunk.js.map",
     "index.html": "/n-bread/index.html",
-    "static/css/main.2fff404f.chunk.css.map": "/n-bread/static/css/main.2fff404f.chunk.css.map",
-    "static/js/2.78d1b63f.chunk.js.LICENSE.txt": "/n-bread/static/js/2.78d1b63f.chunk.js.LICENSE.txt",
+    "static/css/main.722c5016.chunk.css.map": "/n-bread/static/css/main.722c5016.chunk.css.map",
+    "static/js/2.1cb4535e.chunk.js.LICENSE.txt": "/n-bread/static/js/2.1cb4535e.chunk.js.LICENSE.txt",
     "static/media/logo.c421a387.png": "/n-bread/static/media/logo.c421a387.png",
     "static/media/logo_after.f828c523.png": "/n-bread/static/media/logo_after.f828c523.png"
   },
   "entrypoints": [
     "static/js/runtime-main.76ccf057.js",
-    "static/js/2.78d1b63f.chunk.js",
-    "static/css/main.2fff404f.chunk.css",
-    "static/js/main.fdfd59ee.chunk.js"
+    "static/js/2.1cb4535e.chunk.js",
+    "static/css/main.722c5016.chunk.css",
+    "static/js/main.ce67f6a1.chunk.js"
   ]
 }
