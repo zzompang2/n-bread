@@ -29,7 +29,7 @@
 	outline: none;
 }
 
-.body__text {
+.bodyText {
 	padding: .5rem 0;
 	color: var(--dark-brown);
 	text-align: center;
@@ -39,14 +39,14 @@
 }
 
 .logoImage {
-	max-width: 200px;
-	margin: 20px;
+	max-width: 15rem;
+	margin: 5rem 0rem 2rem 0rem;
 }
 
 .navButton {
 	width: 14em;
 	padding: .8rem 2rem;
-	margin: 20px 0;
+	margin: 2rem;
 	
 	display: flex;
 	justify-content: space-around;
@@ -59,7 +59,7 @@
 .navButton__link {
 	color: var(--dark-brown);
 	font-size: 1.2em;
-	font-family: "돋움", "Do Hyeon";
+	font-family: "Do Hyeon";
 	text-align: center;
 	text-decoration: none;
 }

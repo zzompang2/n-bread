@@ -8,7 +8,7 @@ class Home extends React.Component {
 		return (
 			<div className="container">
 				<img className="logoImage" src={logo} alt="빵" />
-				<div className="body__text">여러 명이 결제해도<br/>
+				<div className="bodyText">여러 명이 결제해도<br/>
 					<b>한 번의 송금</b>으로 정산을 완료하세요.</div>
 				<div className="navButton">
 					<Link

@@ -154,9 +154,9 @@ class Result extends React.Component {
 				<div className="title">엔빵 완료!</div>
 				<div className="payments">
 					<div className="table__row">
-						<span className="body__text table__id">번호</span>
-						<span className="body__text table__name">이름</span>
-						<span className="body__text table__pay">총 지불액</span>
+						<span className="bodyText table__id">번호</span>
+						<span className="bodyText table__name">이름</span>
+						<span className="bodyText table__pay">총 지불액</span>
 					</div>
 					{people.map(person => (
 						<div key={person.id} className="table__row">
@@ -170,17 +170,17 @@ class Result extends React.Component {
 				<div className="empty" />
 
 				{isAllZero ?
-				<div className="body__text">정산할 게 없네요! 이렇게 깔끔할 수가!</div>
+				<div className="bodyText">정산할 게 없네요! 이렇게 깔끔할 수가!</div>
 				:
 				<div>
-					<div className="body__text">돈 보내주세요</div>
+					<div className="bodyText">돈 보내주세요</div>
 					<div className="moneyFlow">
 						<div className="table__row">
-							<span className="body__text table__id">번호</span>
-							<span className="body__text table__name">보내는 이</span>
-							<span className="body__text table__pay">금액</span>
-							<span className="body__text table__id">번호</span>
-							<span className="body__text table__name">받는 이</span>
+							<span className="bodyText table__id">번호</span>
+							<span className="bodyText table__name">보내는 이</span>
+							<span className="bodyText table__pay">금액</span>
+							<span className="bodyText table__id">번호</span>
+							<span className="bodyText table__name">받는 이</span>
 						</div>
 					
 						{moneyFlows.map((flow, idx) => (
@@ -196,7 +196,7 @@ class Result extends React.Component {
 				</div>
 				}
 				<div className="empty" />
-				
+
 				<div className="navButton">
 					<Link
 						className="navButton__link"

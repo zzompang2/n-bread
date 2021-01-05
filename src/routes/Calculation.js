@@ -215,7 +215,7 @@ class Calculation extends React.Component {
 
 				{ number < 2 ?
 				<div>
-					<div className="body__text">몇 명인가요?</div>
+					<div className="bodyText">몇 명인가요?</div>
 					<div className="numberBox">
 						<input
 							type="number"
@@ -227,7 +227,7 @@ class Calculation extends React.Component {
 					</div>
 				</div>
 				:
-				<div className="body__text">모두 {number}명이군요!</div>
+				<div className="bodyText">모두 {number}명이군요!</div>
 				}
 				<div className="errorMsg">{errorMsgs[errorIdx]}</div>
 
@@ -236,8 +236,8 @@ class Calculation extends React.Component {
 				<div className="people">
 					{/* table tag */}
 					<div className="table__row">
-						<div className="body__text table__id">번호</div>
-						<div className="body__text table__name">이름</div>
+						<div className="bodyText table__id">번호</div>
+						<div className="bodyText table__name">이름</div>
 					</div>
 					{/* table elements */}
 					{people.map(person => (
@@ -268,18 +268,18 @@ class Calculation extends React.Component {
 				<div className="payments">
 					{/* table tag */}
 					<div className="table__row">
-						<div className="body__text table__name">결제자</div>
-						<div className="body__text table__pay">금액</div>
+						<div className="bodyText table__name">결제자</div>
+						<div className="bodyText table__pay">금액</div>
 						{people.map(person => (
 							<div
 								key={person.id}
-								className="body__text table__checkbox table__checkboxTag">
+								className="bodyText table__checkbox table__checkboxTag">
 								{person.name.length > 4 ? 
 								person.name.slice(0, 4) + '..'
 								:
 								person.name}</div>
 						))}
-						<div className="body__text table__delButton" />
+						<div className="bodyText table__delButton" />
 					</div>
 					{/* table elements */}
 					{payments.map(payment => (
@@ -358,6 +358,7 @@ class Calculation extends React.Component {
 					</Link>
 					:
 					<button
+						className="navButton__link"
 						onClick={() => this.setState({errorIdx: 5})}>
 						정산하기 ▶
 					</button>
