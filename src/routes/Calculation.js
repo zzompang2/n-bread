@@ -11,28 +11,6 @@ const errorMsgs = [
 	"죄송해요, 20명까지만 지원해요.",
 	"몇 명인지 먼저 입력하고 [확인]을 눌러주세요."
 ];
-const tempNames = [
-	"함창수",
-	"최진",
-	"정서현",
-	"공희재",
-	"조소정",
-	"김상엽",
-	"서승연",
-	"양동해",
-	"한다진",
-	"김민주",
-	"심건희",
-	"김철환",
-	"신정윤",
-	"우혜인",
-	"유승진",
-	"이원준",
-	"이정인",
-	"전재형",
-	"조재구",
-	"최상아"
-];
 
 class Calculation extends React.Component {
 	state = {
@@ -60,7 +38,6 @@ class Calculation extends React.Component {
 		else if (numberInput > 20)
 			this.setState({errorIdx: 4});
 		else {
-			// const { number } = state;
 			const number = numberInput;
 			const people = [];
 			const payments = [];
@@ -69,13 +46,16 @@ class Calculation extends React.Component {
 			for (let i = 0; i < number; i++)
 				joins.push(true);
 
-			const names = [...tempNames];
+			// const names = [...tempNames];
+			// for (let i = 0; i < number; i++) {
+			// 	const random = Math.floor(Math.random() * names.length);
+			// 	console.log("random:", random, "namesLen:", names.length);
+			// 	people.push({ id: i, name: names.splice(random, 1)});
+			// }
 
-			for (let i = 0; i < number; i++) {
-				const random = Math.floor(Math.random() * names.length);
-				console.log("random:", random, "namesLen:", names.length);
-				people.push({ id: i, name: names.splice(random, 1)});
-			}
+			for (let i = 0; i < number; i++)
+				people.push({ id: i, name: ""});
+
 			payments.push({ pid: 0, payer: 0, money: "", joins: [...joins] });
 			this.setState({number, people, payments, errorIdx: 0});
 		}
@@ -220,6 +200,7 @@ class Calculation extends React.Component {
 						<input
 							type="number"
 							placeholder="0"
+							autoComplete="off"
 							value={numberInput}
 							onChange={handleChangeNumber} />
 						<button
@@ -236,7 +217,7 @@ class Calculation extends React.Component {
 				<div className="people">
 					{/* table tag */}
 					<div className="table__row">
-						<div className="bodyText table__id">번호</div>
+						{/* <div className="bodyText table__id">번호</div> */}
 						<div className="bodyText table__name">이름</div>
 					</div>
 					{/* table elements */}
@@ -244,15 +225,16 @@ class Calculation extends React.Component {
 						<div
 							key={person.id}
 							className="table__row">
-							<div
+							{/* <div
 								className="table__id whiteBox">
 									{person.id+1}
-							</div>
+							</div> */}
 							<div
 								className="table__name whiteBox">
 								<input
 									id={person.id}
-									placeholder="이름"
+									placeholder={`사람${person.id+1}`}
+									autoComplete="off"
 									value={person.name}
 									onChange={handleChangeName} />
 							</div>
@@ -274,10 +256,14 @@ class Calculation extends React.Component {
 							<div
 								key={person.id}
 								className="bodyText table__checkbox table__checkboxTag">
-								{person.name.length > 4 ? 
-								person.name.slice(0, 4) + '..'
-								:
-								person.name}</div>
+								{person.name === "" ?
+								`사람${person.id+1}`
+								: (
+									person.name.length > 4 ? 
+									person.name.slice(0, 4) + '..'
+									:
+									person.name
+								)}</div>
 						))}
 						<div className="bodyText table__delButton" />
 					</div>
@@ -296,7 +282,7 @@ class Calculation extends React.Component {
 										<option
 											key={person.id}
 											value={person.id}>
-											{person.name}
+											{person.name === "" ? `사람${person.id+1}` : person.name}
 										</option>
 									))}
 								</select>
@@ -308,6 +294,7 @@ class Calculation extends React.Component {
 									type="number"
 									placeholder={0}
 									value={payment.money}
+									autoComplete="off"
 									onChange={handleChangeMoney}
 									onFocus={handleFocus}
 									onBlur={handleBlur} />

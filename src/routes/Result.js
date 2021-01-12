@@ -154,14 +154,14 @@ class Result extends React.Component {
 				<div className="title">엔빵 완료!</div>
 				<div className="payments">
 					<div className="table__row">
-						<span className="bodyText table__id">번호</span>
+						{/* <span className="bodyText table__id">번호</span> */}
 						<span className="bodyText table__name">이름</span>
 						<span className="bodyText table__pay">총 지불액</span>
 					</div>
 					{people.map(person => (
 						<div key={person.id} className="table__row">
-							<div className="table__id whiteBox">{person.id}</div>
-							<div className="table__name whiteBox">{person.name}</div>
+							{/* <div className="table__id whiteBox">{person.id+1}</div> */}
+							<div className="table__name whiteBox">{person.name === "" ? `사람${person.id+1}` : person.name}</div>
 							<div className="table__pay whiteBox">{totalPaidMoney[person.id]}</div>
 						</div>
 					))}
@@ -176,20 +176,20 @@ class Result extends React.Component {
 					<div className="bodyText">돈 보내주세요</div>
 					<div className="moneyFlow">
 						<div className="table__row">
-							<span className="bodyText table__id">번호</span>
+							{/* <span className="bodyText table__id">번호</span> */}
 							<span className="bodyText table__name">보내는 이</span>
 							<span className="bodyText table__pay">금액</span>
-							<span className="bodyText table__id">번호</span>
+							{/* <span className="bodyText table__id">번호</span> */}
 							<span className="bodyText table__name">받는 이</span>
 						</div>
 					
 						{moneyFlows.map((flow, idx) => (
 							<div key={idx} className="table__row">
-								<div className="table__id whiteBox">{flow.from}</div>
-								<div className="table__name whiteBox">{people[flow.from].name}</div>
+								{/* <div className="table__id whiteBox">{flow.from+1}</div> */}
+								<div className="table__name whiteBox">{people[flow.from].name === "" ? `사람${people[flow.from].id+1}` : people[flow.from].name}</div>
 								<div className="table__pay whiteBox">{flow.money}원</div>
-								<div className="table__id whiteBox">{flow.to}</div>
-								<div className="table__name whiteBox">{people[flow.to].name}</div>
+								{/* <div className="table__id whiteBox">{flow.to+1}</div> */}
+								<div className="table__name whiteBox">{people[flow.to].name === "" ? `사람${people[flow.to].id+1}` : people[flow.to].name}</div>
 							</div>
 						))}
 					</div>
