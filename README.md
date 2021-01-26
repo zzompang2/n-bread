@@ -1,5 +1,6 @@
 N빵 (N-bread)
 ============
+<img src="/readme/2-0.png" title="메인 화면" alt="MainScreen"></img>
 
 1 서비스 소개
 ----------
@@ -12,16 +13,15 @@ N빵 (N-bread)
 2 사용법
 ------
 ### 2.1 인원 수 입력
-<img src="/readme/2-1.jpg" title="인원 수 입력" alt="사용법1"></img>
+<img src="/readme/2-1.png" title="인원 수 입력" alt="사용법1"></img>
 
 ### 2.2 정보 입력
-<img src="/readme/2-2.jpg" title="인원 수 입력" alt="사용법2"></img>
-
-이름 입력
-결제한 사람과 결제 금액, N빵 대상자들만 체크
+<img src="/readme/2-2.png" title="정보 입력" alt="사용법2"></img>
+* 참가자 들의 이름을 입력
+* 결제한 사람과 결제 금액, N빵 대상자들만 체크
 
 ### 2.3 계산하기
-<img src="/readme/2-3.jpg" title="인원 수 입력" alt="사용법3"></img>
+<img src="/readme/2-3.png" title="결과" alt="사용법3"></img>
 
 3 알고리즘 설명
 ------------
